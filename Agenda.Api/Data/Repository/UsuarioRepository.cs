@@ -20,7 +20,13 @@ namespace Agenda.Api.Data.Repository
 
         public IEnumerable<Usuario> Get() => _context.Usuarios;
 
-        public Usuario Get(int id) => GetUsuario(id);
+        public Usuario Get(int id)
+        {
+            return _context.Usuarios.AsNoTracking()
+                .Include(x => x.Endereco)
+                .Include(x => x.Telefone).ThenInclude(x => x.Tipo)
+                .Where(x => x.Id == id).FirstOrDefault();
+        }
 
         public void Post(Usuario usuario)
         {
@@ -73,16 +79,6 @@ namespace Agenda.Api.Data.Repository
             _context.Entry(usuario.Telefone).Property("TipoId").CurrentValue = idTipo;
             _context.Add(usuario.Telefone);
             _context.SaveChanges();
-        }
-
-        // métodos auxiliares
-
-        private Usuario GetUsuario(int id)
-        {
-            return _context.Usuarios.AsNoTracking()
-                .Include(x => x.Endereco)
-                .Include(x => x.Telefone).ThenInclude(x => x.Tipo)
-                .Where(x => x.Id == id).FirstOrDefault();
         }
     }
 }

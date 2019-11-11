@@ -3,6 +3,7 @@ using Agenda.Api.Models;
 using Agenda.Api.Services.Usuarios;
 using Agenda.ApiServices.Usuarios;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Agenda.Api.Controllers
 {
@@ -23,7 +24,16 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get() => Ok(_usuarioRepository.Get());
+        public IActionResult Get(byte page = 1, byte size = 10)
+        {
+            var usuarios = _usuarioRepository.Get().ToList();
+            var count = usuarios.Count;
+
+            // aplicando paginação
+            usuarios = usuarios.Skip((page - 1) * size).Take(size).ToList();
+
+            return Ok(usuarios, count);
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
