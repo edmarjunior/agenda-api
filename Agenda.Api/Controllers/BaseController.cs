@@ -67,5 +67,6 @@ namespace Agenda.Api.Controllers
         }
 
         protected new IActionResult NotFound() => Content(HttpStatusCode.NotFound, null);
+
     }
 }
