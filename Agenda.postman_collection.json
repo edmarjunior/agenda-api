@@ -1,180 +1,241 @@
 {
-	"info": {
-		"_postman_id": "3baf6ed3-2fb4-4127-99c2-81cb055148c9",
-		"name": "Agenda",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
+	"id": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+	"name": "Agenda",
+	"description": "",
+	"order": [],
+	"folders": [
 		{
-			"name": "api/usuarios",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/usuarios",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"usuarios"
-					]
-				}
-			},
-			"response": []
+			"name": "Medicos",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"order": [
+				"53fbff87-6613-2fe4-b545-0ad9168a500f",
+				"d9265df7-686b-9824-1f11-b58b8a3aa2f8"
+			],
+			"owner": 0,
+			"folders_order": [],
+			"id": "e8832d8c-5468-5430-36be-90617accd558"
 		},
 		{
-			"name": "api/usuarios/{id}",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/usuarios/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"usuarios",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "api/usuarios/{id}",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"Id\": 2,\r\n        \"Nome\": \"maria editada\",\r\n        \"Cpf\": \"123456789\",\r\n        \"Rg\": \"1111122222\",\r\n        \"Email\": \"edmar.acjr@gmail.com.br\",\r\n        \"Endereco\": {\r\n            \"Id\": 3,\r\n            \"Cep\": \"77777\",\r\n            \"Logradouro\": \"bbbbb\",\r\n            \"Numero\": 44444,\r\n            \"Cidade\": \"Passos\",\r\n            \"Estado\": \"ST\"\r\n        }\r\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/usuarios/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"usuarios",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "api/usuarios/",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"maria\",\r\n    \"cpf\": \"123456789\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"edmar.acjr@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"id\": 0,\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/usuarios",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "api/usuarios/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/usuarios/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"usuarios",
-						"2"
-					]
-				}
-			},
-			"response": []
+			"name": "Usuarios",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"order": [
+				"a4c2b4c8-ccfb-9cdd-2f26-d37a05a4d86a",
+				"bd0b9b84-1550-fb9d-f779-924975607b19",
+				"cef670b0-655b-9e51-e567-578111798cdd",
+				"69775f30-a951-bcd8-6f3c-79a1495ccd5b",
+				"d16f61d8-402a-25d2-6803-03038747716e"
+			],
+			"owner": 0,
+			"folders_order": [],
+			"id": "87c7d2ec-b896-7043-4c92-daa39a7bc0d8"
 		}
 	],
-	"protocolProfileBehavior": {}
+	"folders_order": [
+		"87c7d2ec-b896-7043-4c92-daa39a7bc0d8",
+		"e8832d8c-5468-5430-36be-90617accd558"
+	],
+	"timestamp": 0,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "53fbff87-6613-2fe4-b545-0ad9168a500f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/medicos",
+			"folder": "87c7d2ec-b896-7043-4c92-daa39a7bc0d8",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505428944,
+			"name": "api/medicos",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "69775f30-a951-bcd8-6f3c-79a1495ccd5b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/usuarios",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505425329,
+			"name": "api/usuarios/",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": "{\r\n    \"nome\": \"Paulo Sadao\",\r\n    \"cpf\": \"123456789\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"edmar.acjr@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"id\": 0,\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n"
+		},
+		{
+			"id": "a4c2b4c8-ccfb-9cdd-2f26-d37a05a4d86a",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/usuarios",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505421612,
+			"name": "api/usuarios",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "bd0b9b84-1550-fb9d-f779-924975607b19",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:5000/api/usuarios/2",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505422762,
+			"name": "api/usuarios/{id}",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": []
+		},
+		{
+			"id": "cef670b0-655b-9e51-e567-578111798cdd",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/usuarios/2",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505423737,
+			"name": "api/usuarios/{id}",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": "{\r\n    \"id\": 2,\r\n    \"nome\": \"maria\",\r\n    \"cpf\": \"123456789\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"edmar.acjr@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"id\": 0,\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    }\r\n}\r\n"
+		},
+		{
+			"id": "d16f61d8-402a-25d2-6803-03038747716e",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/usuarios/2",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573505426904,
+			"name": "api/usuarios/{id}",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "d9265df7-686b-9824-1f11-b58b8a3aa2f8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/api/medicos",
+			"folder": "87c7d2ec-b896-7043-4c92-daa39a7bc0d8",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1573508418796,
+			"name": "api/medicos",
+			"description": "",
+			"collectionId": "a93ac167-1e9c-d4ce-51a2-111bb7bc74a8",
+			"responses": [],
+			"rawModeData": "{\r\n    \"nome\": \"edmar\",\r\n    \"cpf\": \"123456789\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"edmar.acjr@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"id\": 0,\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n"
+		}
+	]
 }
