@@ -30,6 +30,9 @@ namespace Agenda.Api.Data.Repository
 
         public void Put(Usuario usuario)
         {
+            _context.Entry(usuario).Property("EnderecoId").CurrentValue = null;
+            _context.Entry(usuario).Property("TelefoneId").CurrentValue = null;
+
             _context.Entry(usuario).State = EntityState.Modified;
             _context.SaveChanges();
         }
@@ -42,15 +45,14 @@ namespace Agenda.Api.Data.Repository
 
         // Endereço 
 
-        public Endereco PostEndereco(Usuario usuario)
+        public void PostEndereco(Usuario usuario)
         {
             _context.Add(usuario.Endereco);
-            return usuario.Endereco;
+            _context.SaveChanges();
         }
 
         public void DeleteEndereco(Usuario usuario)
         {
-            _context.Entry(usuario).Property("TelefoneId").CurrentValue = null;
             _context.Remove(usuario.Endereco);
             _context.SaveChanges();
         }
@@ -59,18 +61,18 @@ namespace Agenda.Api.Data.Repository
 
         public void DeleteTelefone(Usuario usuario)
         {
-            usuario.Telefone.Tipo = null;
-            _context.Entry(usuario).Property("TelefoneId").CurrentValue = null;
-            //Put(usuario);
             _context.Remove(usuario.Telefone);
             _context.SaveChanges();
         }
 
-        public Telefone PostTelefone(Usuario usuario, byte idTipo)
+        public void PostTelefone(Usuario usuario)
         {
+            var idTipo = usuario.Telefone.Tipo.Id;
+            usuario.Telefone.Tipo = null;
+
             _context.Entry(usuario.Telefone).Property("TipoId").CurrentValue = idTipo;
             _context.Add(usuario.Telefone);
-            return usuario.Telefone;
+            _context.SaveChanges();
         }
 
         // métodos auxiliares

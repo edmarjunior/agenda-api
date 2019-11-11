@@ -27,17 +27,19 @@ namespace Agenda.Api.Services.Usuarios
 
             _usuarioRepository.Delete(usuario);
 
-            _usuarioRepository.DeleteTelefone(usuario);
+            if (usuario.Telefone != null)
+                _usuarioRepository.DeleteTelefone(usuario);
 
-            _usuarioRepository.DeleteEndereco(usuario);
+            if (usuario.Endereco != null)
+                _usuarioRepository.DeleteEndereco(usuario);
 
             return usuario;
         }
 
         public Usuario Post(Usuario usuario)
         {
-            if (usuario.Telefone != null && !PostTelefone(usuario))
-                return null;
+            if (usuario.Telefone != null)
+                PostTelefone(usuario);
 
             _usuarioRepository.Post(usuario);
 
@@ -54,39 +56,36 @@ namespace Agenda.Api.Services.Usuarios
                 return;
             }
 
-            // Endereço (cadastro)
-            if (userDb.Endereco == null && usuario.Endereco != null)
-                usuario.Endereco = _usuarioRepository.PostEndereco(usuario);
-
-            // Telefone (cadastro) 
-            if (userDb.Telefone == null && usuario.Telefone != null)
-            {
-                if (!PostTelefone(usuario))
-                    return;
-            }
-
             _usuarioRepository.Put(usuario);
 
-            // Endereço (remoção)
-            if (userDb.Endereco != null && usuario.Endereco == null)
+            // Endereço (atualização)
+
+            if (userDb.Endereco != null)
                 _usuarioRepository.DeleteEndereco(userDb);
 
-            // Telefone (remoção) 
-            if (userDb.Telefone != null && usuario.Telefone == null)
+            if (usuario.Endereco != null)
+                _usuarioRepository.PostEndereco(usuario);
+
+            // Telefone (atualização) 
+
+            if (userDb.Telefone != null)
                 _usuarioRepository.DeleteTelefone(userDb);
 
+            if (usuario.Telefone != null)
+                PostTelefone(usuario);
         }
 
-        private bool PostTelefone(Usuario usuario)
+        private void PostTelefone(Usuario usuario)
         {
             var tipoTelefone = usuario.Telefone?.Tipo;
 
             if (tipoTelefone == null)
-                return _notification.AddWithReturn<bool>("Tipo de telefone não informado");
+            {
+                _notification.AddWithReturn<bool>("Tipo de telefone não informado");
+                return;
+            }
 
-            usuario.Telefone.Tipo = null;
-            usuario.Telefone = _usuarioRepository.PostTelefone(usuario, tipoTelefone.Id);
-            return true;
+            _usuarioRepository.PostTelefone(usuario);
         }
     }
 }

@@ -11,10 +11,10 @@ namespace Agenda.Api.Services.Usuarios
         void Put(Usuario usuario);
         void Delete(Usuario usuario);
 
-        Endereco PostEndereco(Usuario usuario);
+        void PostEndereco(Usuario usuario);
         void DeleteEndereco(Usuario usuario);
 
-        Telefone PostTelefone(Usuario usuario, byte idTipo);
+        void PostTelefone(Usuario usuario);
         void DeleteTelefone(Usuario usuario);
     }
 }
