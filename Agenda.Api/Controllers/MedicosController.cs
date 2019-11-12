@@ -13,8 +13,7 @@ namespace Agenda.Api.Controllers
         private readonly IMedicoRepository _medicoRepository;
         private readonly IMedicoService _medicoService;
 
-        public MedicosController(IMedicoRepository medicosRepository, Notification notification,
-            IMedicoService medicoService) : base(notification)
+        public MedicosController(IMedicoRepository medicosRepository, Notification notification, IMedicoService medicoService) : base(notification)
         {
             _medicoRepository = medicosRepository;
             _medicoService = medicoService;
@@ -54,6 +53,8 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+            _medicoRepository.BeginTransaction();
+
             // editando
             _medicoService.Put(medico);
 
@@ -74,6 +75,8 @@ namespace Agenda.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            _medicoRepository.BeginTransaction();
+
             // cadastrando
             medico = _medicoService.Post(medico);
 
@@ -93,6 +96,8 @@ namespace Agenda.Api.Controllers
         {
             if (!Exists(id))
                 return NotFound();
+
+            _medicoRepository.BeginTransaction();
 
             // excluindo
             var medico = _medicoService.Delete(id);
