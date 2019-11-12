@@ -1,6 +1,7 @@
 ﻿using Agenda.Api.Data.Context;
 using Agenda.Api.Data.Repository;
 using Agenda.Api.Infra;
+using Agenda.Api.Services.Agendamentos;
 using Agenda.Api.Services.Medicos;
 using Agenda.Api.Services.Pacientes;
 using Agenda.Api.Services.Usuarios;
@@ -68,11 +69,13 @@ namespace Agenda.Api
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IMedicoService, MedicoService>();
             services.AddTransient<IPacienteService, PacienteService>();
+            services.AddTransient<IAgendamentoService, AgendamentoService>();
 
             // repositories
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IMedicoRepository, MedicoRepository>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
+            services.AddTransient<IAgendamentoRepository, AgendamentoRepository>();
 
         }
     }
