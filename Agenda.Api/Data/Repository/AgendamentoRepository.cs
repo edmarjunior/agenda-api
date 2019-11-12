@@ -2,8 +2,10 @@
 using Agenda.Api.Data.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services.Agendamentos;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Agenda.Api.Data.Repository
 {
@@ -23,22 +25,41 @@ namespace Agenda.Api.Data.Repository
 
         public IEnumerable<Agendamento> Get(int? idMedico)
         {
-            throw new NotImplementedException();
+            return _context.Agendamentos.AsNoTracking()
+                .Include(x => x.Medico)
+                .Include(x => x.Paciente)
+                .Where(x => x.Medico.Id == (idMedico ?? x.Medico.Id));
         }
 
         public Agendamento Get(int id)
         {
-            throw new NotImplementedException();
+            return _context.Agendamentos.AsNoTracking()
+                .Include(x => x.Medico)
+                .Include(x => x.Paciente)
+                .Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Agendamento Post(Agendamento gendamento)
+        public Agendamento Post(Agendamento agendamento)
         {
-            throw new NotImplementedException();
+            _context.Entry(agendamento).Property("MedicoId").CurrentValue = agendamento.Medico.Id;
+            _context.Entry(agendamento).Property("PacienteId").CurrentValue = agendamento.Paciente.Id;
+
+            agendamento.Medico = null;
+            agendamento.Paciente = null;
+
+            return _context.Add(agendamento).Entity;
         }
 
-        public void Put(Agendamento gendamento)
+        public void Put(Agendamento agendamento)
         {
-            throw new NotImplementedException();
+            _context.Entry(agendamento).Property("MedicoId").CurrentValue = agendamento.Medico.Id;
+            _context.Entry(agendamento).Property("PacienteId").CurrentValue = agendamento.Paciente.Id;
+
+            agendamento.Medico = null;
+            agendamento.Paciente = null;
+
+            _context.Entry(agendamento).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
