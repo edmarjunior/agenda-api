@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Agenda.Api.Infra;
+﻿using Agenda.Api.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services.Medicos;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Agenda.Api.Controllers
 {
@@ -10,20 +10,20 @@ namespace Agenda.Api.Controllers
     [ApiController]
     public class MedicosController : BaseController
     {
-        private readonly IMedicoRepository _medicosRepository;
+        private readonly IMedicoRepository _medicoRepository;
         private readonly IMedicoService _medicoService;
 
         public MedicosController(IMedicoRepository medicosRepository, Notification notification,
             IMedicoService medicoService) : base(notification)
         {
-            _medicosRepository = medicosRepository;
+            _medicoRepository = medicosRepository;
             _medicoService = medicoService;
         }
 
         [HttpGet]
         public IActionResult Get(byte page = 1, byte size = 10)
         {
-            var medicos = _medicosRepository.Get().ToList();
+            var medicos = _medicoRepository.Get().ToList();
             var count = medicos.Count;
 
             // aplicando paginação
@@ -35,7 +35,7 @@ namespace Agenda.Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var medico = _medicosRepository.Get(id);
+            var medico = _medicoRepository.Get(id);
 
             return medico == null
                 ? NotFound()
@@ -54,11 +54,18 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+            // editando
             _medicoService.Put(medico);
 
-            return _notification.Any
-                ? BadRequest()
-                : NoContent();
+            if (_notification.Any)
+            {
+                _medicoRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _medicoRepository.CommitTransaction();
+
+            return NoContent();
         }
 
         [HttpPost]
@@ -67,11 +74,18 @@ namespace Agenda.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var medicoDb = _medicoService.Post(medico);
+            // cadastrando
+            medico = _medicoService.Post(medico);
 
-            return _notification.Any
-                ? BadRequest()
-                : Created(medicoDb);
+            if (_notification.Any)
+            {
+                _medicoRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _medicoRepository.CommitTransaction();
+
+            return Created(medico);
         }
 
         [HttpDelete("{id}")]
@@ -80,13 +94,20 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+            // excluindo
             var medico = _medicoService.Delete(id);
 
-            return _notification.Any
-                ? BadRequest()
-                : Ok(medico);
+            if (_notification.Any)
+            {
+                _medicoRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _medicoRepository.CommitTransaction();
+
+            return Ok(medico);
         }
 
-        private bool Exists(int id) => _medicosRepository.Get(id) != null;
+        private bool Exists(int id) => _medicoRepository.Get(id) != null;
     }
 }
