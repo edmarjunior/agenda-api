@@ -1,11 +1,10 @@
 ﻿using Agenda.Api.Models;
+using Agenda.Api.Services;
 
 namespace Agenda.ApiServices.Usuarios
 {
-    public interface IUsuarioService
+    public interface IUsuarioService : IPessoaService<Usuario>
     {
-        Usuario Delete(int id);
-        void Put(Usuario usuario);
-        Usuario Post(Usuario usuario);
+
     }
 }
