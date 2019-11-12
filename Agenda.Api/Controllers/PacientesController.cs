@@ -20,9 +20,13 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(byte page = 1, byte size = 10)
+        public IActionResult Get(string cpf = null, byte page = 1, byte size = 10)
         {
             var pacientes = _pacienteRepository.Get().ToList();
+
+            if (!string.IsNullOrEmpty(cpf))
+                pacientes = pacientes.Where(x => x.Cpf.Equals(cpf)).ToList();
+
             var count = pacientes.Count;
 
             // aplicando paginação
