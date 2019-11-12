@@ -1,9 +1,10 @@
-﻿using Agenda.Api.Models;
+﻿using Agenda.Api.Data.Infra;
+using Agenda.Api.Models;
 using System.Collections.Generic;
 
 namespace Agenda.Api.Services
 {
-    public interface IPessoaRepository<T> where T : class
+    public interface IPessoaRepository<T> : IDataBaseTransaction where T : class
     {
         IEnumerable<T> Get();
         T Get(int id);

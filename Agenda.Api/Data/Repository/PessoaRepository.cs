@@ -1,4 +1,5 @@
 ﻿using Agenda.Api.Data.Context;
+using Agenda.Api.Data.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -6,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Agenda.Api.Data.Repository
 {
-    public class PessoaRepository<T> : IPessoaRepository<T> where T : class
+    public class PessoaRepository<T> : DataBaseTransaction, IPessoaRepository<T> where T : class
     {
-        private readonly AgendaContext _context;
+        protected AgendaContext _context;
 
-        public PessoaRepository(AgendaContext context)
+        public PessoaRepository(AgendaContext context) : base(context)
         {
             _context = context;
         }
