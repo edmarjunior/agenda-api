@@ -67,10 +67,10 @@ namespace Agenda.Api.Data.Repository
 
         public void PostTelefone(Pessoa pessoa)
         {
-            var idTipo = pessoa.Telefone.Tipo.Id;
-            pessoa.Telefone.Tipo = null;
+            //var idTipo = pessoa.Telefone.Tipo.Id;
 
-            _context.Entry(pessoa.Telefone).Property("TipoId").CurrentValue = idTipo;
+            _context.Entry(pessoa.Telefone).Property("TipoId").CurrentValue = pessoa.Telefone.Tipo.Id;
+            pessoa.Telefone.Tipo = null;
             _context.Add(pessoa.Telefone);
             _context.SaveChanges();
         }
