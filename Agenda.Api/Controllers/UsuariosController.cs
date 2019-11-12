@@ -57,11 +57,18 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+            // editando
             _usuarioService.Put(usuario);
 
-            return _notification.Any
-                ? BadRequest()
-                : NoContent();
+            if (_notification.Any)
+            {
+                _usuarioRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _usuarioRepository.CommitTransaction();
+
+            return NoContent();
         }
 
         [HttpPost]
@@ -70,11 +77,18 @@ namespace Agenda.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var usuarioDb = _usuarioService.Post(usuario);
+            // cadastrando
+            usuario = _usuarioService.Post(usuario);
 
-            return _notification.Any
-                ? BadRequest()
-                : Created(usuarioDb);
+            if (_notification.Any)
+            {
+                _usuarioRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _usuarioRepository.CommitTransaction();
+
+            return Created(usuario);
         }
 
         [HttpDelete("{id}")]
@@ -83,11 +97,18 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+            // excluindo
             var usuario = _usuarioService.Delete(id);
 
-            return _notification.Any
-                ? BadRequest()
-                : Ok(usuario);
+            if (_notification.Any)
+            {
+                _usuarioRepository.RollbackTransaction();
+                return BadRequest();
+            }
+
+            _usuarioRepository.CommitTransaction();
+
+            return Ok(usuario);
         }
 
         private bool Exists(int id) => _usuarioRepository.Get(id) != null;
