@@ -14,10 +14,7 @@ namespace Agenda.Api.Controllers
         private readonly IUsuarioService _usuarioService;
         private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuariosController(IUsuarioService usuarioService,
-            IUsuarioRepository usuarioRepository,
-            Notification notification)
-            : base(notification)
+        public UsuariosController(IUsuarioService usuarioService, IUsuarioRepository usuarioRepository, Notification notification) : base(notification)
         {
             _usuarioService = usuarioService;
             _usuarioRepository = usuarioRepository;
@@ -57,6 +54,9 @@ namespace Agenda.Api.Controllers
             if (!Exists(id))
                 return NotFound();
 
+
+            _usuarioRepository.BeginTransaction();
+
             // editando
             _usuarioService.Put(usuario);
 
@@ -77,6 +77,8 @@ namespace Agenda.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            _usuarioRepository.BeginTransaction();
+
             // cadastrando
             usuario = _usuarioService.Post(usuario);
 
@@ -96,6 +98,8 @@ namespace Agenda.Api.Controllers
         {
             if (!Exists(id))
                 return NotFound();
+
+            _usuarioRepository.BeginTransaction();
 
             // excluindo
             var usuario = _usuarioService.Delete(id);
