@@ -76,7 +76,6 @@ namespace Agenda.Api
             services.AddTransient<IMedicoRepository, MedicoRepository>();
             services.AddTransient<IPacienteRepository, PacienteRepository>();
             services.AddTransient<IAgendamentoRepository, AgendamentoRepository>();
-
         }
     }
 }

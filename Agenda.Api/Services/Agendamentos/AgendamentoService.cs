@@ -1,7 +1,8 @@
-﻿using Agenda.Api.Data.Repository;
+﻿using Agenda.Api.Dto;
 using Agenda.Api.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services.Medicos;
+using Agenda.Api.Services.Pacientes;
 using System.Collections.Generic;
 
 namespace Agenda.Api.Services.Agendamentos
@@ -11,12 +12,17 @@ namespace Agenda.Api.Services.Agendamentos
         private readonly IAgendamentoRepository _agendamentoRepository;
         private readonly Notification _notification;
         private readonly IMedicoRepository _medicoRepository;
+        private readonly IPacienteRepository _pacienteRepository;
 
-        public AgendamentoService(AgendamentoRepository agendamentoRepository, Notification notification, IMedicoRepository medicoRepository)
+        public AgendamentoService(IAgendamentoRepository agendamentoRepository,
+            Notification notification,
+            IMedicoRepository medicoRepository,
+            IPacienteRepository pacienteRepository)
         {
             _agendamentoRepository = agendamentoRepository;
             _notification = notification;
             _medicoRepository = medicoRepository;
+            _pacienteRepository = pacienteRepository;
         }
 
         public Agendamento Delete(int id)
@@ -36,8 +42,11 @@ namespace Agenda.Api.Services.Agendamentos
 
         public Agendamento Get(int id) => _agendamentoRepository.Get(id);
 
-        public Agendamento Post(Agendamento agendamento)
+        public Agendamento Post(AgendamentoDto agendamentoDto)
         {
+
+            var agendamento = agendamentoDto.ToModel();
+
             if (!IsValid(agendamento))
                 return agendamento;
 
@@ -60,7 +69,7 @@ namespace Agenda.Api.Services.Agendamentos
                 return _notification.AddWithReturn<bool>("Médico não encontrado");
 
             // validando PACIENTE
-            var paciente = _medicoRepository.Get(agendamento.Paciente.Id);
+            var paciente = _pacienteRepository.Get(agendamento.Paciente.Id);
             if (paciente == null)
                 return _notification.AddWithReturn<bool>("Paciente não encontrado");
 

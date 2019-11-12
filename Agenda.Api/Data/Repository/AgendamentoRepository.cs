@@ -41,13 +41,16 @@ namespace Agenda.Api.Data.Repository
 
         public Agendamento Post(Agendamento agendamento)
         {
-            _context.Entry(agendamento).Property("MedicoId").CurrentValue = agendamento.Medico.Id;
-            _context.Entry(agendamento).Property("PacienteId").CurrentValue = agendamento.Paciente.Id;
+            //_context.Entry(agendamento).Property("MedicoId").CurrentValue = agendamento.Medico.Id;
+            //_context.Entry(agendamento).Property("PacienteId").CurrentValue = agendamento.Paciente.Id;
 
-            agendamento.Medico = null;
-            agendamento.Paciente = null;
-
-            return _context.Add(agendamento).Entity;
+            //agendamento.Medico = null;
+            //agendamento.Paciente = null;
+            _context.Add(agendamento);
+            _context.Entry(agendamento.Medico).State = EntityState.Unchanged;
+            _context.Entry(agendamento.Paciente).State = EntityState.Unchanged;
+            _context.SaveChanges();
+            return agendamento;
         }
 
         public void Put(Agendamento agendamento)

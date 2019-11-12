@@ -1,4 +1,5 @@
-﻿using Agenda.Api.Infra;
+﻿using Agenda.Api.Dto;
+using Agenda.Api.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services.Agendamentos;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,9 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(int? idMedico, byte page = 1, byte size = 10)
+        public IActionResult Get(int? idMedico = null, byte page = 1, byte size = 10)
         {
-            var agendamentos = _agendamentoService.Get(idMedico).ToList();
+            var agendamentos = _agendamentoRepository.Get(idMedico).ToList();
             var count = agendamentos.Count;
 
             // aplicando paginação
@@ -70,7 +71,7 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Agendamento agendamento)
+        public IActionResult Post(AgendamentoDto agendamentoDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -78,7 +79,7 @@ namespace Agenda.Api.Controllers
             _agendamentoRepository.BeginTransaction();
 
             // cadastrando
-            agendamento = _agendamentoService.Post(agendamento);
+            var agendamento = _agendamentoService.Post(agendamentoDto);
 
             if (_notification.Any)
             {

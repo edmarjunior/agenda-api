@@ -1,4 +1,5 @@
-﻿using Agenda.Api.Models;
+﻿using Agenda.Api.Dto;
+using Agenda.Api.Models;
 using System.Collections.Generic;
 
 namespace Agenda.Api.Services.Agendamentos
@@ -7,8 +8,8 @@ namespace Agenda.Api.Services.Agendamentos
     {
         IEnumerable<Agendamento> Get(int? idMedico);
         Agendamento Get(int id);
-        Agendamento Post(Agendamento gendamento);
-        void Put(Agendamento gendamento);
+        Agendamento Post(AgendamentoDto agendamentoDto);
+        void Put(Agendamento agendamento);
         Agendamento Delete(int id);
     }
 }
