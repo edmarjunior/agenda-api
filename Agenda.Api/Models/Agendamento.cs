@@ -8,6 +8,5 @@ namespace Agenda.Api.Models
         public DateTime Data { get; set; }
         public Medico Medico { get; set; }
         public Paciente Paciente { get; set; }
-        public Usuario Usuario { get; set; }
     }
 }
