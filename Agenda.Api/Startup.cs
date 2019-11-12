@@ -1,9 +1,8 @@
 ﻿using Agenda.Api.Data.Context;
 using Agenda.Api.Data.Repository;
 using Agenda.Api.Infra;
-using Agenda.Api.Models;
-using Agenda.Api.Services;
 using Agenda.Api.Services.Medicos;
+using Agenda.Api.Services.Pacientes;
 using Agenda.Api.Services.Usuarios;
 using Agenda.ApiServices.Usuarios;
 using Microsoft.AspNetCore.Builder;
@@ -36,14 +35,11 @@ namespace Agenda.Api
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddTransient<IUsuarioService, UsuarioService>();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-            services.AddTransient<IMedicoService, MedicoService>();
-            services.AddTransient<IMedicoRepository, MedicoRepository>();
-
-            services.AddScoped<Notification>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // injetando dependencias do projeto
+            InjectDependences(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +58,22 @@ namespace Agenda.Api
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+        }
+
+        public void InjectDependences(IServiceCollection services)
+        {
+            services.AddScoped<Notification>();
+
+            // services
+            services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<IMedicoService, MedicoService>();
+            services.AddTransient<IPacienteService, PacienteService>();
+
+            // repositories
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IMedicoRepository, MedicoRepository>();
+            services.AddTransient<IPacienteRepository, PacienteRepository>();
+
         }
     }
 }
