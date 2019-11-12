@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agenda.Api.Migrations
 {
     [DbContext(typeof(AgendaContext))]
-    [Migration("20191111055007_InsertTelefoneTipos")]
-    partial class InsertTelefoneTipos
+    [Migration("20191112180349_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,15 +33,11 @@ namespace Agenda.Api.Migrations
 
                     b.Property<int?>("PacienteId");
 
-                    b.Property<int?>("UsuarioId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MedicoId");
 
                     b.HasIndex("PacienteId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Agendamentos");
                 });
@@ -60,7 +56,7 @@ namespace Agenda.Api.Migrations
 
                     b.Property<string>("Logradouro");
 
-                    b.Property<int>("Numero");
+                    b.Property<int?>("Numero");
 
                     b.HasKey("Id");
 
@@ -73,27 +69,25 @@ namespace Agenda.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cpf");
+                    b.Property<string>("Cpf")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
                     b.Property<int?>("EnderecoId");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<string>("Rg");
 
                     b.Property<int?>("TelefoneId");
-
-                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
 
                     b.HasIndex("TelefoneId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Medicos");
                 });
@@ -104,27 +98,25 @@ namespace Agenda.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cpf");
+                    b.Property<string>("Cpf")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
                     b.Property<int?>("EnderecoId");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<string>("Rg");
 
                     b.Property<int?>("TelefoneId");
-
-                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
 
                     b.HasIndex("TelefoneId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pacientes");
                 });
@@ -135,9 +127,9 @@ namespace Agenda.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte>("Ddd");
+                    b.Property<byte?>("Ddd");
 
-                    b.Property<int>("Numero");
+                    b.Property<int?>("Numero");
 
                     b.Property<byte?>("TipoId");
 
@@ -165,13 +157,15 @@ namespace Agenda.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Cpf");
+                    b.Property<string>("Cpf")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
                     b.Property<int?>("EnderecoId");
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
                     b.Property<string>("Rg");
 
@@ -195,10 +189,6 @@ namespace Agenda.Api.Migrations
                     b.HasOne("Agenda.Api.Models.Paciente", "Paciente")
                         .WithMany("Agendamentos")
                         .HasForeignKey("PacienteId");
-
-                    b.HasOne("Agenda.Api.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Agenda.Api.Models.Medico", b =>
@@ -210,10 +200,6 @@ namespace Agenda.Api.Migrations
                     b.HasOne("Agenda.Api.Models.Telefone", "Telefone")
                         .WithMany()
                         .HasForeignKey("TelefoneId");
-
-                    b.HasOne("Agenda.Api.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Agenda.Api.Models.Paciente", b =>
@@ -225,10 +211,6 @@ namespace Agenda.Api.Migrations
                     b.HasOne("Agenda.Api.Models.Telefone", "Telefone")
                         .WithMany()
                         .HasForeignKey("TelefoneId");
-
-                    b.HasOne("Agenda.Api.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("Agenda.Api.Models.Telefone", b =>

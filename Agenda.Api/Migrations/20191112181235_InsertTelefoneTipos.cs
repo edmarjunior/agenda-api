@@ -12,7 +12,6 @@ namespace Agenda.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("DELETE FROM TelefoneTipos");
-
         }
     }
 }
