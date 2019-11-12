@@ -75,6 +75,7 @@ namespace Agenda.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            _pacienteRepository.BeginTransaction();
 
             // cadastrando
             paciente = _pacienteService.Post(paciente);
@@ -95,6 +96,8 @@ namespace Agenda.Api.Controllers
         {
             if (!Exists(id))
                 return NotFound();
+
+            _pacienteRepository.BeginTransaction();
 
             // excluindo
             var paciente = _pacienteService.Delete(id);
