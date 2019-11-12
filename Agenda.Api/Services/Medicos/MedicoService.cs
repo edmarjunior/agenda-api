@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Agenda.Api.Infra;
+﻿using Agenda.Api.Infra;
 using Agenda.Api.Models;
 
 namespace Agenda.Api.Services.Medicos
@@ -24,7 +20,7 @@ namespace Agenda.Api.Services.Medicos
 
             if (medico == null)
             {
-                _notification.Add("Usuario não encontrado");
+                _notification.Add("Médico não encontrado");
                 return null;
             }
 
@@ -51,11 +47,11 @@ namespace Agenda.Api.Services.Medicos
 
         public void Put(Medico medico)
         {
-            var userDb = _medicoRepository.Get(medico.Id);
+            var medicoDb = _medicoRepository.Get(medico.Id);
 
-            if (userDb == null)
+            if (medicoDb == null)
             {
-                _notification.Add("Usuario não encontrado");
+                _notification.Add("Médico não encontrado");
                 return;
             }
 
@@ -63,16 +59,16 @@ namespace Agenda.Api.Services.Medicos
 
             // Endereço (atualização)
 
-            if (userDb.Endereco != null)
-                _medicoRepository.DeleteEndereco(userDb);
+            if (medicoDb.Endereco != null)
+                _medicoRepository.DeleteEndereco(medicoDb);
 
             if (medico.Endereco != null)
                 _medicoRepository.PostEndereco(medico);
 
             // Telefone (atualização) 
 
-            if (userDb.Telefone != null)
-                _medicoRepository.DeleteTelefone(userDb);
+            if (medicoDb.Telefone != null)
+                _medicoRepository.DeleteTelefone(medicoDb);
 
             if (medico.Telefone != null)
                 PostTelefone(medico);
