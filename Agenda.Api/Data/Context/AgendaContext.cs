@@ -14,5 +14,12 @@ namespace Agenda.Api.Data.Context
         public DbSet<TelefoneTipo> TelefoneTipos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>().HasAlternateKey(x => x.Cpf);
+            modelBuilder.Entity<Medico>().HasAlternateKey(x => x.Cpf);
+            modelBuilder.Entity<Paciente>().HasAlternateKey(x => x.Cpf);
+        }
     }
 }

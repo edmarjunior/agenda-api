@@ -1,5 +1,6 @@
 ﻿using Agenda.Api.Infra;
 using Agenda.Api.Models;
+using System.Linq;
 
 namespace Agenda.Api.Services.Medicos
 {
@@ -37,6 +38,9 @@ namespace Agenda.Api.Services.Medicos
 
         public Medico Post(Medico medico)
         {
+            if (!ValidaDuplicidade(medico))
+                return medico;
+
             if (medico.Telefone != null)
                 PostTelefone(medico);
 
@@ -54,6 +58,9 @@ namespace Agenda.Api.Services.Medicos
                 _notification.Add("Médico não encontrado");
                 return;
             }
+
+            if (!ValidaDuplicidade(medico))
+                return;
 
             _medicoRepository.Put(medico);
 
@@ -85,6 +92,16 @@ namespace Agenda.Api.Services.Medicos
             }
 
             _medicoRepository.PostTelefone(medico);
+        }
+
+        private bool ValidaDuplicidade(Medico medico)
+        {
+            var medicos = _medicoRepository.Get().ToList();
+
+            if (medicos.Any(x => x.Cpf.Equals(medico.Cpf) && x.Id != medico.Id))
+                return _notification.AddWithReturn<bool>("CPF já cadastrado para outro médico");
+
+            return true;
         }
     }
 }

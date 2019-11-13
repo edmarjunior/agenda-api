@@ -48,7 +48,7 @@ namespace Agenda.Api.Controllers
                 return BadRequest(ModelState);
 
             if (id != medico.Id)
-                return BadRequest("Identificadores do usuário estão divergentes");
+                return BadRequest("Identificadores do médico estão divergentes");
 
             if (!Exists(id))
                 return NotFound();

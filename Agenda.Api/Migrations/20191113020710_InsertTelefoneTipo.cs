@@ -2,7 +2,7 @@
 
 namespace Agenda.Api.Migrations
 {
-    public partial class InsertTelefoneTipos : Migration
+    public partial class InsertTelefoneTipo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

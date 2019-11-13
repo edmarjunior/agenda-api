@@ -83,6 +83,8 @@ namespace Agenda.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("Cpf");
+
                     b.HasIndex("EnderecoId");
 
                     b.HasIndex("TelefoneId");
@@ -111,6 +113,8 @@ namespace Agenda.Api.Migrations
                     b.Property<int?>("TelefoneId");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Cpf");
 
                     b.HasIndex("EnderecoId");
 
@@ -170,6 +174,8 @@ namespace Agenda.Api.Migrations
                     b.Property<int?>("TelefoneId");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Cpf");
 
                     b.HasIndex("EnderecoId");
 

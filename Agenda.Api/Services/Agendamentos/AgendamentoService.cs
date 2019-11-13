@@ -3,7 +3,7 @@ using Agenda.Api.Infra;
 using Agenda.Api.Models;
 using Agenda.Api.Services.Medicos;
 using Agenda.Api.Services.Pacientes;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Agenda.Api.Services.Agendamentos
 {
@@ -35,26 +35,25 @@ namespace Agenda.Api.Services.Agendamentos
                 return null;
             }
 
-            return _agendamentoRepository.Delete(id);
+            _agendamentoRepository.Delete(agendamento);
+            return agendamento;
         }
 
-        public IEnumerable<Agendamento> Get(int? idMedico) => _agendamentoRepository.Get(idMedico);
-
-        public Agendamento Get(int id) => _agendamentoRepository.Get(id);
-
-        public Agendamento Post(AgendamentoDto agendamentoDto)
+        public void Post(AgendamentoDto agendamentoDto)
         {
-
             var agendamento = agendamentoDto.ToModel();
 
             if (!IsValid(agendamento))
-                return agendamento;
+                return;
 
-            return _agendamentoRepository.Post(agendamento);
+            _agendamentoRepository.Post(agendamento);
+            agendamentoDto.Id = agendamento.Id;
         }
 
-        public void Put(Agendamento agendamento)
+        public void Put(AgendamentoDto agendamentoDto)
         {
+            var agendamento = agendamentoDto.ToModel();
+
             if (!IsValid(agendamento))
                 return;
 
@@ -68,10 +67,24 @@ namespace Agenda.Api.Services.Agendamentos
             if (medico == null)
                 return _notification.AddWithReturn<bool>("Médico não encontrado");
 
+            var agendamentosMedico = _agendamentoRepository.Get(idMedico: medico.Id).ToList();
+            if (agendamentosMedico.Any(x => x.Data == agendamento.Data && x.Id != agendamento.Id))
+                return _notification.AddWithReturn<bool>("Médico já possui outro agendamento nesse horário");
+
+            agendamento.Medico = medico;
+
             // validando PACIENTE
             var paciente = _pacienteRepository.Get(agendamento.Paciente.Id);
             if (paciente == null)
                 return _notification.AddWithReturn<bool>("Paciente não encontrado");
+
+            var agendamentosPaciente = _agendamentoRepository.Get(null, paciente.Id).ToList();
+            if (agendamentosPaciente.Any(x => x.Data == agendamento.Data && x.Id != agendamento.Id))
+                return _notification.AddWithReturn<bool>("Paciente já possui outro agendamento nesse horário");
+
+            agendamento.Medico = medico;
+
+            agendamento.Paciente = paciente;
 
             return true;
         }

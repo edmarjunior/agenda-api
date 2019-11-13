@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agenda.Api.Migrations
 {
     [DbContext(typeof(AgendaContext))]
-    [Migration("20191112180349_InitialCreate")]
+    [Migration("20191113020640_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,8 @@ namespace Agenda.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("Cpf");
+
                     b.HasIndex("EnderecoId");
 
                     b.HasIndex("TelefoneId");
@@ -113,6 +115,8 @@ namespace Agenda.Api.Migrations
                     b.Property<int?>("TelefoneId");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Cpf");
 
                     b.HasIndex("EnderecoId");
 
@@ -172,6 +176,8 @@ namespace Agenda.Api.Migrations
                     b.Property<int?>("TelefoneId");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Cpf");
 
                     b.HasIndex("EnderecoId");
 

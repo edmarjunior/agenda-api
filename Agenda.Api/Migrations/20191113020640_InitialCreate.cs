@@ -74,6 +74,7 @@ namespace Agenda.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medicos", x => x.Id);
+                    table.UniqueConstraint("AK_Medicos_Cpf", x => x.Cpf);
                     table.ForeignKey(
                         name: "FK_Medicos_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,
@@ -104,6 +105,7 @@ namespace Agenda.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pacientes", x => x.Id);
+                    table.UniqueConstraint("AK_Pacientes_Cpf", x => x.Cpf);
                     table.ForeignKey(
                         name: "FK_Pacientes_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,
@@ -134,6 +136,7 @@ namespace Agenda.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.UniqueConstraint("AK_Usuarios_Cpf", x => x.Cpf);
                     table.ForeignKey(
                         name: "FK_Usuarios_Enderecos_EnderecoId",
                         column: x => x.EnderecoId,

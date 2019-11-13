@@ -18,7 +18,7 @@ namespace Agenda.Api.Data.Repository
 
         // CRUD
 
-        public IEnumerable<T> Get() => _context.Set<T>();
+        public IEnumerable<T> Get() => _context.Set<T>().AsNoTracking();
 
         public T Get(int id) => _context.Set<T>().Find(id);
 
@@ -68,10 +68,11 @@ namespace Agenda.Api.Data.Repository
         public void PostTelefone(Pessoa pessoa)
         {
             //var idTipo = pessoa.Telefone.Tipo.Id;
+            //_context.Entry(pessoa.Telefone).Property("TipoId").CurrentValue = pessoa.Telefone.Tipo.Id;
+            //pessoa.Telefone.Tipo = null;
 
-            _context.Entry(pessoa.Telefone).Property("TipoId").CurrentValue = pessoa.Telefone.Tipo.Id;
-            pessoa.Telefone.Tipo = null;
             _context.Add(pessoa.Telefone);
+            _context.Entry(pessoa.Telefone.Tipo).State = EntityState.Unchanged;
             _context.SaveChanges();
         }
     }

@@ -29,27 +29,27 @@ namespace Agenda.Api.Controllers
             // aplicando paginação
             agendamentos = agendamentos.Skip((page - 1) * size).Take(size).ToList();
 
-            return Ok(agendamentos, count);
+            return Ok(agendamentos.Select(x => ConvertResult(x)), count);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var agendamento = _agendamentoService.Get(id);
+            var agendamento = _agendamentoRepository.Get(id);
 
             return agendamento == null
                 ? NotFound()
-                : Ok(agendamento);
+                : Ok(ConvertResult(agendamento));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Agendamento agendamento)
+        public IActionResult Put(int id, AgendamentoDto agendamentoDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (id != agendamento.Id)
-                return BadRequest("Identificadores do usuário estão divergentes");
+            if (id != agendamentoDto.Id)
+                return BadRequest("Identificadores do agendamento estão divergentes");
 
             if (!Exists(id))
                 return NotFound();
@@ -57,7 +57,7 @@ namespace Agenda.Api.Controllers
             _agendamentoRepository.BeginTransaction();
 
             // editando
-            _agendamentoService.Put(agendamento);
+            _agendamentoService.Put(agendamentoDto);
 
             if (_notification.Any)
             {
@@ -79,7 +79,7 @@ namespace Agenda.Api.Controllers
             _agendamentoRepository.BeginTransaction();
 
             // cadastrando
-            var agendamento = _agendamentoService.Post(agendamentoDto);
+            _agendamentoService.Post(agendamentoDto);
 
             if (_notification.Any)
             {
@@ -89,7 +89,7 @@ namespace Agenda.Api.Controllers
 
             _agendamentoRepository.CommitTransaction();
 
-            return Created(agendamento);
+            return Created(agendamentoDto);
         }
 
         [HttpDelete("{id}")]
@@ -111,10 +111,30 @@ namespace Agenda.Api.Controllers
 
             _agendamentoRepository.CommitTransaction();
 
-            return Ok(agendamento);
+            return Ok(ConvertResult(agendamento));
         }
 
         private bool Exists(int id) => _agendamentoRepository.Get(id) != null;
 
+        private object ConvertResult(Agendamento ag)
+        {
+            return new
+            {
+                ag.Id,
+                ag.Data,
+                Medico = new
+                {
+                    ag.Medico.Id,
+                    ag.Medico.Nome,
+                    ag.Medico.Cpf
+                },
+                Paciente = new
+                {
+                    ag.Paciente.Id,
+                    ag.Paciente.Nome,
+                    ag.Paciente.Cpf
+                }
+            };
+        }
     }
 }

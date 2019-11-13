@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -54,6 +55,7 @@ namespace Agenda.Api.Controllers
             return Content(HttpStatusCode.BadRequest, _notification.Get);
         }
 
+
         protected IActionResult BadRequest(string message = null)
         {
             var messages = new List<string>();
@@ -67,6 +69,9 @@ namespace Agenda.Api.Controllers
         }
 
         protected new IActionResult NotFound() => Content(HttpStatusCode.NotFound, null);
+
+        [HttpGet("ping")]
+        public IActionResult Ping() => Ok($"All rigth over here: {DateTime.Now}");
 
     }
 }

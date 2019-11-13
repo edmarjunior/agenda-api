@@ -52,7 +52,7 @@ namespace Agenda.Api.Controllers
                 return BadRequest(ModelState);
 
             if (id != paciente.Id)
-                return BadRequest("Identificadores do usuário estão divergentes");
+                return BadRequest("Identificadores do paciente estão divergentes");
 
             if (!Exists(id))
                 return NotFound();

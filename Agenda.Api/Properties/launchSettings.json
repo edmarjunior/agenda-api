@@ -11,8 +11,8 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchBrowser": false,
+      "launchUrl": "api/usuarios/ping",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "Agenda.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/usuarios/ping",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -1,6 +1,7 @@
 ﻿using Agenda.Api.Infra;
 using Agenda.Api.Models;
 using Agenda.ApiServices.Usuarios;
+using System.Linq;
 
 namespace Agenda.Api.Services.Usuarios
 {
@@ -38,6 +39,9 @@ namespace Agenda.Api.Services.Usuarios
 
         public Usuario Post(Usuario usuario)
         {
+            if (!ValidaDuplicidade(usuario))
+                return usuario;
+
             if (usuario.Telefone != null)
                 PostTelefone(usuario);
 
@@ -55,6 +59,9 @@ namespace Agenda.Api.Services.Usuarios
                 _notification.Add("Usuario não encontrado");
                 return;
             }
+
+            if (!ValidaDuplicidade(usuario))
+                return;
 
             _usuarioRepository.Put(usuario);
 
@@ -86,6 +93,16 @@ namespace Agenda.Api.Services.Usuarios
             }
 
             _usuarioRepository.PostTelefone(usuario);
+        }
+
+        private bool ValidaDuplicidade(Usuario usuario)
+        {
+            var usuarios = _usuarioRepository.Get().ToList();
+
+            if (usuarios.Any(x => x.Cpf.Equals(usuario.Cpf) && x.Id != usuario.Id))
+                return _notification.AddWithReturn<bool>("CPF já cadastrado para outro usuário");
+
+            return true;
         }
     }
 }

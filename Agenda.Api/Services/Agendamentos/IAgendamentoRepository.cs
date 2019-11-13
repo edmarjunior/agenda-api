@@ -6,10 +6,10 @@ namespace Agenda.Api.Services.Agendamentos
 {
     public interface IAgendamentoRepository : IDataBaseTransaction
     {
-        IEnumerable<Agendamento> Get(int? idMedico);
+        IEnumerable<Agendamento> Get(int? idMedico, int? idPaciente = null);
         Agendamento Get(int id);
-        Agendamento Post(Agendamento gendamento);
+        void Post(Agendamento gendamento);
         void Put(Agendamento gendamento);
-        Agendamento Delete(int id);
+        void Delete(Agendamento agendamento);
     }
 }
