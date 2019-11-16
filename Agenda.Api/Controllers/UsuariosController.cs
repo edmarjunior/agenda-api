@@ -21,9 +21,13 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(byte page = 1, byte size = 10)
+        public IActionResult Get(string nome = null, byte page = 1, byte size = 10)
         {
             var usuarios = _usuarioRepository.Get().ToList();
+
+            if (!string.IsNullOrEmpty(nome))
+                usuarios = usuarios.Where(x => x.Nome.Contains(nome)).ToList();
+
             var count = usuarios.Count;
 
             // aplicando paginação

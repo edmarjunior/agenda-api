@@ -9,6 +9,24 @@
 			"name": "Usuarios",
 			"item": [
 				{
+					"name": "api//usuarios/ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/usuarios/ping",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"usuarios",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "api/usuarios",
 					"request": {
 						"method": "GET",
@@ -19,14 +37,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/usuarios",
-							"protocol": "http",
+							"raw": "{{URL}}api/usuarios",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"usuarios"
 							]
 						}
@@ -39,16 +54,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/usuarios/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/usuarios/4",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"usuarios",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -66,17 +78,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Marcio\",\r\n    \"cpf\": \"123456780\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"edmar.acjr@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"id\": 0,\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n"
+							"raw": "{\r\n        \"Nome\": \"Tabata Vasconcelos\",\r\n        \"Cpf\": \"12345678901\",\r\n        \"Rg\": \"456080375\",\r\n        \"Email\": \"tabata@gmail.com.br\",\r\n        \"Endereco\": {\r\n            \"Cep\": \"14404031\",\r\n            \"Logradouro\": \"rua Maria Alice Taveira Coelho\",\r\n            \"Numero\": 130,\r\n            \"Cidade\": \"Passos\",\r\n            \"Estado\": \"MG\"\r\n        },\r\n        \"Telefone\": {\r\n            \"Ddd\": 11,\r\n            \"Numero\": 37012550,\r\n            \"Tipo\": {\r\n                \"Id\": 1,\r\n                \"Nome\": \"Telefone\"\r\n            }\r\n        }\r\n    }"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/usuarios",
-							"protocol": "http",
+							"raw": "{{URL}}api/usuarios",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"usuarios"
 							]
 						}
@@ -95,17 +104,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": 2,\r\n    \"Nome\": \"Marcio editado 2\",\r\n    \"Cpf\": \"123456780\",\r\n    \"Rg\": \"1111122222\",\r\n    \"Email\": \"edmar.acjr@gmail.com.br\",\r\n    \"Endereco\": {\r\n        \"Cep\": \"77777\",\r\n        \"Logradouro\": \"bbbbb\",\r\n        \"Numero\": 44444,\r\n        \"Cidade\": \"Passos\",\r\n        \"Estado\": \"ST\"\r\n    },\r\n    \"Telefone\": {\r\n        \"Ddd\": 16,\r\n        \"Numero\": 9999999,\r\n        \"Tipo\": {\r\n            \"Id\": 1,\r\n            \"Nome\": \"Telefone\"\r\n        }\r\n    }\r\n}"
+							"raw": "{\r\n\t\"id\": 2,\r\n\t\"nome\": \"Tabata Vasconcelos Moreira da Costa\",\r\n\t\"cpf\": \"43405415837\",\r\n\t\"rg\": \"456080375\",\r\n\t\"email\": \"tabata@gmail.com.br\",\r\n\t\"endereco\": {\r\n\t    \"cep\": \"14404031\",\r\n\t    \"logradouro\": \"rua Maria Alice Taveira Coelho editado\",\r\n\t    \"numero\": 130,\r\n\t    \"cidade\": \"Passos\",\r\n\t    \"estado\": \"MG\"\r\n\t},\r\n\t\"telefone\": {\r\n\t    \"ddd\": 11,\r\n\t    \"numero\": 37012550,\r\n\t    \"tipo\":{\r\n\t    \t\"id\": 1\r\n\t    }\r\n\t}\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/usuarios/2",
-							"protocol": "http",
+							"raw": "{{URL}}api/usuarios/2",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"usuarios",
 								"2"
 							]
@@ -128,14 +134,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/usuarios/2",
-							"protocol": "http",
+							"raw": "{{URL}}api/usuarios/2",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"usuarios",
 								"2"
 							]
@@ -160,14 +163,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/pacientes",
-							"protocol": "http",
+							"raw": "{{URL}}api/pacientes",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"pacientes"
 							]
 						}
@@ -180,14 +180,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/pacientes/3",
-							"protocol": "http",
+							"raw": "{{URL}}api/pacientes/3",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"pacientes",
 								"3"
 							]
@@ -210,14 +207,11 @@
 							"raw": "{\r\n    \"nome\": \"murilo\",\r\n    \"cpf\": \"123456780\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"bruno@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/pacientes",
-							"protocol": "http",
+							"raw": "{{URL}}api/pacientes",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"pacientes"
 							]
 						}
@@ -239,14 +233,11 @@
 							"raw": "{\r\n    \"Agendamentos\": null,\r\n    \"Id\": 3,\r\n    \"Nome\": \"murilo editado\",\r\n    \"Cpf\": \"123456789\",\r\n    \"Rg\": \"1111122222\",\r\n    \"Email\": \"bruno@gmail.com.br\",\r\n    \"Endereco\": {\r\n        \"Cep\": \"77777\",\r\n        \"Logradouro\": \"bbbbb\",\r\n        \"Numero\": 44444,\r\n        \"Cidade\": \"Passos\",\r\n        \"Estado\": \"ST\"\r\n    },\r\n    \"Telefone\": {\r\n        \"Ddd\": 16,\r\n        \"Numero\": 9999999,\r\n        \"Tipo\": {\r\n            \"Id\": 1,\r\n            \"Nome\": \"Telefone\"\r\n        }\r\n    }\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/pacientes/3",
-							"protocol": "http",
+							"raw": "{{URL}}api/pacientes/3",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"pacientes",
 								"3"
 							]
@@ -269,14 +260,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/pacientes/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/pacientes/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"pacientes",
 								"1"
 							]
@@ -301,14 +289,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/medicos",
-							"protocol": "http",
+							"raw": "{{URL}}api/medicos",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"medicos"
 							]
 						}
@@ -326,14 +311,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/medicos/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/medicos/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"medicos",
 								"1"
 							]
@@ -356,14 +338,11 @@
 							"raw": "{\r\n    \"nome\": \"Dra. Maria\",\r\n    \"cpf\": \"123\",\r\n    \"rg\": \"1111122222\",\r\n    \"email\": \"debora@gmail.com.br\",\r\n    \"endereco\": {\r\n        \"cep\": \"77777\",\r\n        \"logradouro\": \"bbbbb\",\r\n        \"numero\": 44444,\r\n        \"cidade\": \"Passos\",\r\n        \"estado\": \"ST\"\r\n    },\r\n    \"telefone\": {\r\n        \"ddd\": 16,\r\n        \"numero\": 9999999,\r\n        \"tipo\":{\r\n        \t\"id\": 1\r\n        }\r\n    }\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/medicos",
-							"protocol": "http",
+							"raw": "{{URL}}api/medicos",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"medicos"
 							]
 						}
@@ -385,14 +364,11 @@
 							"raw": "{\r\n    \"Agendamentos\": null,\r\n    \"Id\": 1,\r\n    \"Nome\": \"Dra. Debora editada\",\r\n    \"Cpf\": \"123\",\r\n    \"Rg\": \"1111122222\",\r\n    \"Email\": \"debora@gmail.com.br\",\r\n    \"Endereco\": {\r\n        \"Cep\": \"77777\",\r\n        \"Logradouro\": \"bbbbb\",\r\n        \"Numero\": 44444,\r\n        \"Cidade\": \"Passos\",\r\n        \"Estado\": \"ST\"\r\n    },\r\n    \"Telefone\": {\r\n        \"Ddd\": 16,\r\n        \"Numero\": 9999999,\r\n        \"Tipo\": {\r\n            \"Id\": 1,\r\n            \"Nome\": \"Telefone\"\r\n        }\r\n    }\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/medicos/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/medicos/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"medicos",
 								"1"
 							]
@@ -415,14 +391,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/medicos/1",
-							"protocol": "http",
+							"raw": "{{URL}}api/medicos/1",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"medicos",
 								"1"
 							]
@@ -447,14 +420,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/agendamentos",
-							"protocol": "http",
+							"raw": "{{URL}}api/agendamentos",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"agendamentos"
 							]
 						}
@@ -472,14 +442,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:5000/api/agendamentos/",
-							"protocol": "http",
+							"raw": "{{URL}}api/agendamentos/",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"agendamentos",
 								""
 							]
@@ -502,14 +469,11 @@
 							"raw": "{\r\n    \"data\": \"11-12-2019 20:00:00\",\r\n    \"medicoId\": 2,\r\n    \"pacienteId\": 1\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/agendamentos",
-							"protocol": "http",
+							"raw": "{{URL}}api/agendamentos",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"agendamentos"
 							]
 						}
@@ -531,14 +495,11 @@
 							"raw": "{\r\n    \"data\": \"11-12-2019 22:00:00\",\r\n    \"medicoId\": 2,\r\n    \"pacienteId\": 1\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/agendamentos/7",
-							"protocol": "http",
+							"raw": "{{URL}}api/agendamentos/7",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"agendamentos",
 								"7"
 							]
@@ -561,14 +522,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/agendamentos/5",
-							"protocol": "http",
+							"raw": "{{URL}}api/agendamentos/5",
 							"host": [
-								"localhost"
+								"{{URL}}api"
 							],
-							"port": "5000",
 							"path": [
-								"api",
 								"agendamentos",
 								"5"
 							]
