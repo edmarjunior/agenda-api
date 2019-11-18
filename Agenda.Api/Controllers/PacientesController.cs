@@ -20,12 +20,12 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(string cpf = null, byte page = 1, byte size = 10)
+        public IActionResult Get(string nome = null, byte page = 1, byte size = 10)
         {
             var pacientes = _pacienteRepository.Get().ToList();
 
-            if (!string.IsNullOrEmpty(cpf))
-                pacientes = pacientes.Where(x => x.Cpf.Equals(cpf)).ToList();
+            if (!string.IsNullOrEmpty(nome))
+                pacientes = pacientes.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
 
             var count = pacientes.Count;
 

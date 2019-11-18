@@ -20,9 +20,13 @@ namespace Agenda.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(byte page = 1, byte size = 10)
+        public IActionResult Get(string nome = null, byte page = 1, byte size = 10)
         {
             var medicos = _medicoRepository.Get().ToList();
+
+            if (!string.IsNullOrEmpty(nome))
+                medicos = medicos.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
+
             var count = medicos.Count;
 
             // aplicando paginação

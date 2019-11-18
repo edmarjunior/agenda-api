@@ -26,7 +26,7 @@ namespace Agenda.Api.Controllers
             var usuarios = _usuarioRepository.Get().ToList();
 
             if (!string.IsNullOrEmpty(nome))
-                usuarios = usuarios.Where(x => x.Nome.Contains(nome)).ToList();
+                usuarios = usuarios.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper())).ToList();
 
             var count = usuarios.Count;
 
